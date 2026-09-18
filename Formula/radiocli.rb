@@ -1,8 +1,8 @@
 class Radiocli < Formula
   desc "Terminal-first world radio receiver"
   homepage "https://github.com/Ciphore/RadioCLI"
-  url "https://registry.npmjs.org/@ciphore/radiocli/-/radiocli-0.2.3.tgz"
-  sha256 "a8d7ebb6473f50232c472944d5b1c3a441e9716204feabc7ad4243b1bd47c553"
+  url "https://registry.npmjs.org/@ciphore/radiocli/-/radiocli-0.2.4.tgz"
+  sha256 "2f8f693e53be5f8d70a2d0229710168322bd6edc2e4e251b67bc1565bab6250f"
   license "MIT"
 
   depends_on "ffmpeg"
