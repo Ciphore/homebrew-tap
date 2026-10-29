@@ -35,20 +35,26 @@ jobs:
           key: ${{ matrix.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
           restore-keys: ${{ matrix.os }}-rubygems-
 
-      - run: brew test-bot --only-cleanup-before
+      - run: brew test-bot --only-cleanup-before --fail-fast
 
-      - run: brew test-bot --only-setup
+      - run: brew test-bot --only-setup --fail-fast
 
       - name: Validate tap syntax
         if: matrix.os != 'macos-15-intel'
-        run: brew test-bot --only-tap-syntax
+        run: brew test-bot --only-tap-syntax --fail-fast
 
       - name: Validate Intel formula loading
         if: matrix.os == 'macos-15-intel'
         run: brew readall --os=all --arch=all ciphore/tap
 
-      - run: brew test-bot --only-formulae
+      - run: brew test-bot --only-formulae --fail-fast
         if: github.event_name == 'pull_request'
+
+      - name: Verify installed formula
+        if: github.event_name == 'pull_request' && matrix.os != 'macos-15-intel'
+        run: |
+          brew install --only-dependencies --include-test ciphore/tap/radiocli
+          brew test --verbose ciphore/tap/radiocli
 
       - name: Upload bottles as artifact
         if: always() && github.event_name == 'pull_request'
