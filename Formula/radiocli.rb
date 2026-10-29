@@ -16,7 +16,7 @@ class Radiocli < Formula
   end
 
   test do
-    assert_match "radiocli doctor", shell_output("#{bin}/radiocli --help")
+    assert_match "Usage: radiocli", shell_output("#{bin}/radiocli --help")
     assert_match "playback=", shell_output("#{bin}/radiocli doctor")
   end
 end
